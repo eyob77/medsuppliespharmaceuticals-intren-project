@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from "cors";
 import path from "path";
+import fs from "fs"
 
 
 import authRoutes from './routes/auth.route.js';
@@ -23,6 +24,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 
 const __dirname = path.resolve();
 
@@ -51,15 +53,23 @@ app.use("/api/message",messageRoutes);
 app.use("/api/setting",settingRoutes);
 app.use("/api/analytics",analyticsRoute);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "admin2", "dist")));
+const distPath = path.join(__dirname, "admin2", "dist");
+const indexHtml = path.join(distPath, "index.html");
 
-  app.get("*", (req, res, next) => {
-    if (!req.path.startsWith("/")) return next();
-    res.sendFile(path.resolve(__dirname, "admin2", "dist", "index.html"));
-  });
-}
+app.use(express.static(distPath));
 
+// Middleware to serve React SPA without using "*"
+app.use((req, res, next) => {
+  // Only handle requests that are NOT API routes
+  if (!req.path.startsWith("/api")) {
+    if (fs.existsSync(indexHtml)) {
+      return res.sendFile(indexHtml);
+    } else {
+      return res.status(500).send("index.html not found. Build frontend first.");
+    }
+  }
+  next();
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

@@ -18,13 +18,13 @@ const storeRefreshToken = async (userId, refreshToken) => {
 const setCookies = (res, accessToken, refreshToken) => {
     res.cookie('accessToken', accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === "production",
         sameSite: 'Strict',
         maxAge: 15 * 60 * 1000
     });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === "production",
         sameSite: 'Strict',
         maxAge: 7 * 24 * 60 * 60 * 1000
     });
@@ -34,9 +34,7 @@ const setCookies = (res, accessToken, refreshToken) => {
 export const login = async (req, res) => {
     try {
         const {email,password} = req.body;
-        console.log(
-            "hi"
-        )
+        
         const user =await User.findOne({email});
 
         if(user && (await user.matchPassword(password))){
@@ -96,7 +94,7 @@ export const refreshToken = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: process.env.NODE_ENV === "production",
             sameSite: 'Strict',
             maxAge: 15 * 60 * 1000
         });

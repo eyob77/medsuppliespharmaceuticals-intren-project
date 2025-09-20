@@ -3,7 +3,6 @@ import Message from "../model/message.model.js";
 import Partner from "../model/partner.model.js";
 import Product from "../model/product.model.js";
 import Service from "../model/service.model.js";
-import Setting from "../model/setting.model.js";
 import Testimonial from "../model/testimonial.model.js";
 import User from "../model/user.model.js";
 
@@ -18,7 +17,6 @@ export const getAnalytics = async (req, res) => {
       testimonials: await Testimonial.countDocuments(),
       partners: await Partner.countDocuments(),
       messages: await Message.countDocuments(),
-      // settings: await Setting.countDocuments(),
     };
 
     res.status(200).json({analytics});
