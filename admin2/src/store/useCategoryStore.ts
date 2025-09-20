@@ -105,7 +105,7 @@ export const useCategoryStore = create<CategoryState>((set) => ({
       const res = await axios.delete(`/product/catagory/deleteCatagory/${id}`);
       toast.success(res.data.message);
       set((state: CategoryState) => ({
-        categoryList: state.categoryList.filter((cat) => cat._id !== id),
+        categoryList: state.categoryList.filter((cat) => cat._id !== String(id)),
         loading: false,
       }));
     } catch (error) {
