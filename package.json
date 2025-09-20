@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix admin2 && npm run build --prefix admin2"
+    "build": "npm install && npm install --prefix admin2 && npm run build --prefix admin2 && npm prune --production --prefix admin2"
   },
   "type": "module",
   "keywords": [],
