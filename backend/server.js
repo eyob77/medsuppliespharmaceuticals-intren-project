@@ -53,21 +53,21 @@ app.use("/api/message",messageRoutes);
 app.use("/api/setting",settingRoutes);
 app.use("/api/analytics",analyticsRoute);
 
-const distPath = path.join(__dirname, "admin2", "dist");
-const indexHtml = path.join(distPath, "index.html");
+// const distPath = path.join(__dirname, "admin2", "dist");
+// const indexHtml = path.join(distPath, "index.html");
 
-app.use(express.static(distPath));
+// app.use(express.static(distPath));
 
-app.use((req, res, next) => {
-  if (!req.path.startsWith("/api")) {
-    if (fs.existsSync(indexHtml)) {
-      return res.sendFile(indexHtml);
-    } else {
-      return res.status(500).send("index.html not found. Build frontend first.");
-    }
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   if (!req.path.startsWith("/api")) {
+//     if (fs.existsSync(indexHtml)) {
+//       return res.sendFile(indexHtml);
+//     } else {
+//       return res.status(500).send("index.html not found. Build frontend first.");
+//     }
+//   }
+//   next();
+// });
 
 
 app.listen(PORT, () => {
