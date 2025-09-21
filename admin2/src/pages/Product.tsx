@@ -26,10 +26,11 @@ export default function Product(){
         </Button>
       </div>
       <div className="w-full h-full grid grid-cols-3 gap-6 px-6">
-        {products.length >0 ?(
+        {
           loading?(
           <p>Loading...</p>
         ):(
+          products.length > 0?
           products?.map((product,index)=>(
             <Card 
               name={product.name} 
@@ -41,10 +42,7 @@ export default function Product(){
               id={product._id}
               path={"/products/edit/" + product._id}
             />
-          ))
-        )
-        ):(
-          <p>No products found</p>
+          )):(<p>no product found</p>)
         )}
       </div>
     </div>

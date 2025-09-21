@@ -58,9 +58,7 @@ const indexHtml = path.join(distPath, "index.html");
 
 app.use(express.static(distPath));
 
-// Middleware to serve React SPA without using "*"
 app.use((req, res, next) => {
-  // Only handle requests that are NOT API routes
   if (!req.path.startsWith("/api")) {
     if (fs.existsSync(indexHtml)) {
       return res.sendFile(indexHtml);
@@ -70,6 +68,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

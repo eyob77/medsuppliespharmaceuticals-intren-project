@@ -98,7 +98,7 @@ export default function AddProduct(){
           <p>Loading...</p>
         </div>
       )}
-          <h2 className="font-bold text-xl mb-5">Add products</h2>
+          <h2 className="font-bold text-xl mb-5">{pathname.includes("edit")?"Edit":"Add"} products</h2>
           <div>
             <form className="w-full h-full grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-2">
